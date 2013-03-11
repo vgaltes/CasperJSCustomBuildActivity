@@ -2,6 +2,7 @@
 {
     using System;
     using System.Activities;
+    using Microsoft.TeamFoundation.Build.Workflow.Activities;
 
     /// <summary>
     /// Executes CasperJs with all files in SourcesDirectory
