@@ -1,4 +1,6 @@
-﻿namespace CustomBuildActivities
+﻿using Microsoft.TeamFoundation.Build.Client;
+
+namespace CustomBuildActivities
 {
     using System;
     using System.Activities;
@@ -7,6 +9,7 @@
     /// <summary>
     /// Executes CasperJs with all files in SourcesDirectory
     /// </summary>
+    [BuildActivity(HostEnvironmentOption.Agent)]
     public sealed class CasperJSBuildActivity : CodeActivity
     {
         /// <summary>
@@ -26,7 +29,9 @@
         /// <param name="context">The activity's context</param>
         protected override void Execute(CodeActivityContext context)
         {
-            throw new NotImplementedException();
+            context.TrackBuildMessage("This is a message.");
+            context.TrackBuildWarning("This is a warning.");
+            context.TrackBuildError("This is an error.");
         }
     }
 }
