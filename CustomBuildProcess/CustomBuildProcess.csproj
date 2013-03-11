@@ -69,6 +69,12 @@
       <SubType>Designer</SubType>
     </XamlAppDef>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomBuildActivities\CustomBuildActivities.csproj">
+      <Project>{124D8FBB-BB98-45E3-B1C7-ED261318DE4E}</Project>
+      <Name>CustomBuildActivities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
