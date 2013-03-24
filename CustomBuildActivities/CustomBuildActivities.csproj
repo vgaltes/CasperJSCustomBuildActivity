@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CasperJSBuildActivity.cs" />
     <Compile Include="CasperJsTest.cs" />
+    <Compile Include="CasperJsTestsResults.cs" />
     <Compile Include="CasperJsTestsResultsLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
