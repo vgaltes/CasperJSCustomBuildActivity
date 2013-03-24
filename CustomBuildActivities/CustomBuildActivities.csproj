@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasperJSBuildActivity.cs" />
+    <Compile Include="CasperJsTest.cs" />
+    <Compile Include="CasperJsTestsResultsLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

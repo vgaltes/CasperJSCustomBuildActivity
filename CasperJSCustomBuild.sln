@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBuildActivities", "Cu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBuildProcess", "CustomBuildProcess\CustomBuildProcess.csproj", "{935F130C-9C3E-4DAE-9D69-F763668048C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBuildActivities.Tests", "CustomBuildActivities.Tests\CustomBuildActivities.Tests.csproj", "{5E1382A3-AE58-443D-B22E-66E98F40609A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{935F130C-9C3E-4DAE-9D69-F763668048C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{935F130C-9C3E-4DAE-9D69-F763668048C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{935F130C-9C3E-4DAE-9D69-F763668048C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1382A3-AE58-443D-B22E-66E98F40609A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1382A3-AE58-443D-B22E-66E98F40609A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1382A3-AE58-443D-B22E-66E98F40609A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1382A3-AE58-443D-B22E-66E98F40609A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
