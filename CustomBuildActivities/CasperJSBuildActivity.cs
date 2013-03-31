@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Activities.Tracking;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing.Design;
 using System.IO;
 using System.Reflection;
@@ -33,6 +36,16 @@ namespace CustomBuildActivities
         /// </summary>
         public InArgument<string> CasperJSParameters { get; set; }
 
+        public InArgument<string> TeamProjectCollection { get; set; }
+
+        public InArgument<string> TeamProject { get; set; }
+
+        public InArgument<string> BuildNumber { get; set; }
+
+        public InArgument<string> Platform { get; set; }
+
+        public InArgument<string> Configuration { get; set; }
+
         [RequiredArgument]
         public InArgument<Workspace> Workspace { get; set; }
 
@@ -42,12 +55,62 @@ namespace CustomBuildActivities
         /// <param name="context">The activity's context</param>
         protected override void Execute(CodeActivityContext context)
         {
-            // context.TrackBuildError("This is an error.");
             WorkingFolder workingFolder = Workspace.Get(context).GetWorkingFolderForServerItem(SourcesDirectory.Get(context));
 
-            CreateMsTestResultsFileFromXUnitResultsFile("log.xml", "");
+            // CreateMsTestResultsFileFromXUnitResultsFile("log.xml", "");
+            var testsResults = new CasperJsTestsResults
+                {
+                    PassedTests = new List<CasperJsTest>
+                        {
+                            new CasperJsTest
+                                {
+                                    File = "test.js",
+                                    Name = "passed test",
+                                    Time = 0.459
+                                }
+                        },
+                    FailedTests = new List<CasperJsTest>
+                        {
+                            new CasperJsTest
+                                {
+                                    File = "test.js",
+                                    Name = "passed test",
+                                    Time = 0.459
+                                }
+                        }
+                };
+
+            var trx = CasperJsTrxCreator.Create(testsResults);
+            string temporalFileName = Path.Combine(Path.GetTempPath(), "casperjsresults.trx");
+            File.WriteAllText(temporalFileName, trx);
+
+            context.TrackBuildWarning(string.Format("Trx created at {0}.", temporalFileName));
+
+            var mstestProcess = new Process();
+            mstestProcess.StartInfo.FileName = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) +
+                                        "Microsoft Visual Studio 11.0\\Common7\\IDE\\MSTest.exe";
+            mstestProcess.StartInfo.Arguments = "/publish:" + TeamProjectCollection +
+                                                "/publishbuild:" + BuildNumber +
+                                                "/publishresultsfile:" + temporalFileName +
+                                                "/teamproject:" + TeamProject +
+                                                "/platform:" + Platform +
+                                                "/flavor:" + Configuration;
+
+            // These two optional flags ensure that no DOS window appears
+            mstestProcess.StartInfo.UseShellExecute = false;
+            mstestProcess.StartInfo.CreateNoWindow = true;
+
+            // This ensures that you get the output from the DOS application
+            mstestProcess.StartInfo.RedirectStandardOutput = true;
+
+            // Start the process
+            mstestProcess.Start();
+
+            // Wait that the process exits
+            mstestProcess.WaitForExit();
 
             context.TrackBuildWarning(string.Format("The sources directory is {0}.", workingFolder.LocalItem));
+
         }
 
         private static void CreateMsTestResultsFileFromXUnitResultsFile(string myXmlFile, string myStyleSheet)
