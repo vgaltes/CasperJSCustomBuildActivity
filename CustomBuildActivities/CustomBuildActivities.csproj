@@ -48,6 +48,7 @@
     <Compile Include="CasperJsTest.cs" />
     <Compile Include="CasperJsTestsResults.cs" />
     <Compile Include="CasperJsTestsResultsLoader.cs" />
+    <Compile Include="CasperJsTrxCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
